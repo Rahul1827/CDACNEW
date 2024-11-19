@@ -1,0 +1,587 @@
+mysql> show tables;
++----------------+
+| Tables_in_cdac |
++----------------+
+| customer       |
+| dept           |
+| dept1          |
+| emp            |
+| emp1           |
++----------------+
+5 rows in set (0.03 sec)
+
+mysql> drop table emp1
+    -> ;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE emp1 (
+    ->       empno varchar(4) check (empno like 'e%')Primary key,
+    ->      ename varchar(20) not null,
+    ->      sal float(10,2)not null 
+    ->       check(sal>10000),
+    ->      dno numeric(2),
+    ->      city varchar(20) default 'nashik',
+    ->      check (city in ('pune', 'nashik', 'Mum')),
+    ->      pan varchar(20) unique,
+    ->         FOREIGN KEY (dno) REFERENCES dept1(deptno));
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+mysql> insert into emp1 values('e001','Rahul',150000,10,default, 'p001');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from emp1;
++-------+-------+-----------+------+--------+------+
+| empno | ename | sal       | dno  | city   | pan  |
++-------+-------+-----------+------+--------+------+
+| e001  | Rahul | 150000.00 |   10 | nashik | p001 |
++-------+-------+-----------+------+--------+------+
+1 row in set (0.00 sec)
+
+mysql>  insert into emp1 values('e002','Shrikant',110000,20,'Mumbai', 'p002');
+ERROR 3819 (HY000): Check constraint 'emp1_chk_3' is violated.
+mysql>  insert into emp1 values('e002','Shrikant',110000,20,'Mum', 'p002');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp1;
++-------+----------+-----------+------+--------+------+
+| empno | ename    | sal       | dno  | city   | pan  |
++-------+----------+-----------+------+--------+------+
+| e001  | Rahul    | 150000.00 |   10 | nashik | p001 |
+| e002  | Shrikant | 110000.00 |   20 | Mum    | p002 |
++-------+----------+-----------+------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> drop table emp1;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE emp1 (
+    ->       empno varchar(4) check (empno like 'e%')Primary key,
+    ->      ename varchar(20) not null,
+    ->      sal float(10,2)not null 
+    ->       check(sal>10000),
+    ->      dno numeric(2),
+    ->      city varchar(20) default 'nashik',
+    ->      check (city in ('pune', 'nashik', 'Mum')),
+    ->      pan varchar(20) unique,
+    ->         FOREIGN KEY (dno) REFERENCES dept1(deptno) on delete cascade   on update cascade);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> insert into emp1 values('e001','Rahul',150000,10,default, 'p001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp1 values('e002','Shrikant',110000,20,'Mum', 'p002');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp1;
++-------+----------+-----------+------+--------+------+
+| empno | ename    | sal       | dno  | city   | pan  |
++-------+----------+-----------+------+--------+------+
+| e001  | Rahul    | 150000.00 |   10 | nashik | p001 |
+| e002  | Shrikant | 110000.00 |   20 | Mum    | p002 |
++-------+----------+-----------+------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     10 | acct  | mumbai |
+|     20 | fin   | Nashik |
+|     30 | fin   |        |
++--------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> delete from emp where deptno=10;
+Query OK, 3 rows affected (0.03 sec)
+
+mysql> select * from emp1;
++-------+----------+-----------+------+--------+------+
+| empno | ename    | sal       | dno  | city   | pan  |
++-------+----------+-----------+------+--------+------+
+| e001  | Rahul    | 150000.00 |   10 | nashik | p001 |
+| e002  | Shrikant | 110000.00 |   20 | Mum    | p002 |
++-------+----------+-----------+------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     10 | acct  | mumbai |
+|     20 | fin   | Nashik |
+|     30 | fin   |        |
++--------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> delete from dept1 where deptno=10;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp1;
++-------+----------+-----------+------+------+------+
+| empno | ename    | sal       | dno  | city | pan  |
++-------+----------+-----------+------+------+------+
+| e002  | Shrikant | 110000.00 |   20 | Mum  | p002 |
++-------+----------+-----------+------+------+------+
+1 row in set (0.00 sec)
+
+mysql> update dept1 set ename ='Rahul' where empno='e002';
+ERROR 1054 (42S22): Unknown column 'empno' in 'where clause'
+mysql> update dept1 set ename ='Rahul' where dname='Nashik';
+ERROR 1054 (42S22): Unknown column 'ename' in 'field list'
+mysql> update dept1 set dname ='Rahul' where dname='Nashik';
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from emp1;
++-------+----------+-----------+------+------+------+
+| empno | ename    | sal       | dno  | city | pan  |
++-------+----------+-----------+------+------+------+
+| e002  | Shrikant | 110000.00 |   20 | Mum  | p002 |
++-------+----------+-----------+------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp1;
++-------+----------+-----------+------+------+------+
+| empno | ename    | sal       | dno  | city | pan  |
++-------+----------+-----------+------+------+------+
+| e002  | Shrikant | 110000.00 |   20 | Mum  | p002 |
++-------+----------+-----------+------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     20 | fin   | Nashik |
+|     30 | fin   |        |
++--------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update dept1 set loc='Indore' where deptno=20;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp1;
++-------+----------+-----------+------+------+------+
+| empno | ename    | sal       | dno  | city | pan  |
++-------+----------+-----------+------+------+------+
+| e002  | Shrikant | 110000.00 |   20 | Mum  | p002 |
++-------+----------+-----------+------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     20 | fin   | Indore |
+|     30 | fin   |        |
++--------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> insert into emp1(ename, empno, sal, deptno) values ('Rahul','e001', 50000,10);
+ERROR 1054 (42S22): Unknown column 'deptno' in 'field list'
+mysql> insert into emp1(ename, empno, sal, dno) values ('Rahul','e001', 50000,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`cdac`.`emp1`, CONSTRAINT `emp1_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept1` (`deptno`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> insert into emp1(ename, empno, sal, dno) values ('Rahul','e001', 50000,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`cdac`.`emp1`, CONSTRAINT `emp1_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept1` (`deptno`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> insert into emp1(ename, empno, sal, deptno) values ('Rahul','e001', 50000,20);
+ERROR 1054 (42S22): Unknown column 'deptno' in 'field list'
+mysql> insert into emp1(ename, empno, sal, dno) values ('Rahul','e001', 50000,20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp1(ename, empno, sal, dno) values ('Divya','e003', 60000,20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp1;
++-------+----------+-----------+------+--------+------+
+| empno | ename    | sal       | dno  | city   | pan  |
++-------+----------+-----------+------+--------+------+
+| e001  | Rahul    |  50000.00 |   20 | nashik | NULL |
+| e002  | Shrikant | 110000.00 |   20 | Mum    | p002 |
+| e003  | Divya    |  60000.00 |   20 | nashik | NULL |
++-------+----------+-----------+------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> create table emp2(empno int, ename varchar(20), sal float(2,5));
+ERROR 1427 (42000): For float(M,D), double(M,D) or decimal(M,D), M must be >= D (column 'sal').
+mysql> create table emp2(empno int, ename varchar(20), sal int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> alter table emp2 add comm numeric(10,2);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp2;
+Empty set (0.00 sec)
+
+mysql> desc emp2
+    -> ;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| empno | int           | YES  |     | NULL    |       |
+| ename | varchar(20)   | YES  |     | NULL    |       |
+| sal   | int           | YES  |     | NULL    |       |
+| comm  | decimal(10,2) | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> alter table emp2  modify ename varchar(50);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp2;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| empno | int           | YES  |     | NULL    |       |
+| ename | varchar(50)   | YES  |     | NULL    |       |
+| sal   | int           | YES  |     | NULL    |       |
+| comm  | decimal(10,2) | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table emp2  add primary key (empno);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp2;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| empno | int           | NO   | PRI | NULL    |       |
+| ename | varchar(50)   | YES  |     | NULL    |       |
+| sal   | int           | YES  |     | NULL    |       |
+| comm  | decimal(10,2) | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> alter table emp2 add email varchar(50);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp2;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| empno | int           | NO   | PRI | NULL    |       |
+| ename | varchar(50)   | YES  |     | NULL    |       |
+| sal   | int           | YES  |     | NULL    |       |
+| comm  | decimal(10,2) | YES  |     | NULL    |       |
+| email | varchar(50)   | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table emp2 change sal salary int ;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp2;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| empno  | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(50)   | YES  |     | NULL    |       |
+| salary | int           | YES  |     | NULL    |       |
+| comm   | decimal(10,2) | YES  |     | NULL    |       |
+| email  | varchar(50)   | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table emp2 rename newwmp2
+    -> alter table emp2 rename newwmp2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alter table emp2 rename newwmp2' at line 2
+mysql> alter table emp2 rename newwmp2;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc emp2;
+ERROR 1146 (42S02): Table 'cdac.emp2' doesn't exist
+mysql> show tables;
++----------------+
+| Tables_in_cdac |
++----------------+
+| customer       |
+| dept           |
+| dept1          |
+| emp            |
+| emp1           |
+| newwmp2        |
++----------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table emp2  add pan char(10) third;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'third' at line 1
+mysql> alter table newemp2  add pan char(10) third;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'third' at line 1
+mysql> alter table newemp2  add pan char(10) after ename ;
+ERROR 1146 (42S02): Table 'cdac.newemp2' doesn't exist
+mysql> alter table newwmp2  add pan char(10) after ename ;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table newwnp2 rename to emp2; 
+ERROR 1146 (42S02): Table 'cdac.newwnp2' doesn't exist
+mysql> alter table newwmp2 rename to emp2; 
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_cdac |
++----------------+
+| customer       |
+| dept           |
+| dept1          |
+| emp            |
+| emp1           |
+| emp2           |
++----------------+
+6 rows in set (0.03 sec)
+
+mysql> alter table newwmp2 rename to newemp2; 
+ERROR 1146 (42S02): Table 'cdac.newwmp2' doesn't exist
+mysql> alter table emp2 rename to newemp2; 
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_cdac |
++----------------+
+| customer       |
+| dept           |
+| dept1          |
+| emp            |
+| emp1           |
+| newemp2        |
++----------------+
+6 rows in set (0.00 sec)
+
+mysql> 
+mysql> ALTER TABLE newemp2
+    -> Add  check (salary > 10000);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from newemp2;
+Empty set (0.00 sec)
+
+mysql> desc newemp2;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| empno  | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(50)   | YES  |     | NULL    |       |
+| pan    | char(10)      | YES  |     | NULL    |       |
+| salary | int           | YES  |     | NULL    |       |
+| comm   | decimal(10,2) | YES  |     | NULL    |       |
+| email  | varchar(50)   | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table newemp2 add divno char(10) after ename;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc newemp2;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| empno  | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(50)   | YES  |     | NULL    |       |
+| divno  | char(10)      | YES  |     | NULL    |       |
+| pan    | char(10)      | YES  |     | NULL    |       |
+| salary | int           | YES  |     | NULL    |       |
+| comm   | decimal(10,2) | YES  |     | NULL    |       |
+| email  | varchar(50)   | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> create view v1 as select * from emp;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select * from v1;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+11 rows in set (0.00 sec)
+
+mysql> create view v2 as select empno, ename, hiredate from emp where deptno =10;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from v2;
+Empty set (0.00 sec)
+
+mysql> ^C
+mysql> create view v3 as select empno, hiredate,job,deptno where sal between 1000 and 2000 && deptno =10;
+ERROR 1054 (42S22): Unknown column 'empno' in 'field list'
+mysql> select * from emp;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+11 rows in set (0.00 sec)
+
+mysql> create view v3 as select empno, hiredate,job,deptno from emp where sal between 1000 and 2000 && deptno =10;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> select * from v3;
+Empty set (0.00 sec)
+
+mysql> desc v3;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| empno    | decimal(4,0) | NO   |     | NULL    |       |
+| hiredate | date         | YES  |     | NULL    |       |
+| job      | varchar(9)   | YES  |     | NULL    |       |
+| deptno   | decimal(2,0) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop view v3;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create view v3 as select empno, hiredate,job,deptno , sal from emp where sal between 1000 and 2000 && deptno =10;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> drop view v3;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc v3;
+ERROR 1146 (42S02): Table 'cdac.v3' doesn't exist
+mysql> desc v3;
+ERROR 1146 (42S02): Table 'cdac.v3' doesn't exist
+mysql> desc view v3;
+ERROR 1146 (42S02): Table 'cdac.view' doesn't exist
+mysql> show views;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'views' at line 1
+mysql> show view;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'view' at line 1
+mysql> create view v3 as select empno, hiredate,job,deptno , sal from emp where sal between 1000 and 2000 && deptno =20;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> desc view v3;
+ERROR 1146 (42S02): Table 'cdac.view' doesn't exist
+mysql> create view v3 as select empno, hiredate,job,deptno from emp where sal between 1000 and 2000 && deptno =10;
+ERROR 1050 (42S01): Table 'v3' already exists
+mysql> create view v4 as select empno, hiredate,job,deptno , sal from emp where sal between 1000 and 2000 && deptno =20;
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> desc view4;
+ERROR 1146 (42S02): Table 'cdac.view4' doesn't exist
+mysql> insert into v4 values (1,'2024-2-2','manager',10,1200);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from v4;
++-------+------------+-------+--------+---------+
+| empno | hiredate   | job   | deptno | sal     |
++-------+------------+-------+--------+---------+
+|  7876 | 2013-01-02 | CLERK |     20 | 1100.00 |
++-------+------------+-------+--------+---------+
+1 row in set (0.00 sec)
+
+mysql> create index sal_id on emp(sal);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp where sal>2000;
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 2012-01-06 | 2850.00 | NULL |     30 |
+|  7566 | JONES | MANAGER | 7839 | 2013-01-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 2012-01-10 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 2012-04-02 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+4 rows in set (0.01 sec)
+
+mysql> ^C
+mysql> CREATE INDEX idx_job_desc ON emp (JOB DESC);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp where sal >2000;
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 2012-01-06 | 2850.00 | NULL |     30 |
+|  7566 | JONES | MANAGER | 7839 | 2013-01-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 2012-01-10 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 2012-04-02 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from emp where jon in ('clerk', 'manager');
+ERROR 1054 (42S22): Unknown column 'jon' in 'where clause'
+mysql> select * from emp where job in ('clerk', 'manager');
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|     1 | NULL  | manager | NULL | 2024-02-02 | 1200.00 | NULL |     10 |
+|  7566 | JONES | MANAGER | 7839 | 2013-01-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER | 7839 | 2012-01-06 | 2850.00 | NULL |     30 |
+|  7369 | SMITH | CLERK   | 7902 | 2012-02-02 |  800.00 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 2013-01-02 | 1100.00 | NULL |     20 |
+|  7900 | JAMES | CLERK   | 7698 | 2012-03-02 |  950.00 | NULL |     30 |
++-------+-------+---------+------+------------+---------+------+--------+
+6 rows in set (0.01 sec)
+
+mysql> create index jobSal_id on emp (job,sal);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp where sal >2000;
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 2012-01-06 | 2850.00 | NULL |     30 |
+|  7566 | JONES | MANAGER | 7839 | 2013-01-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 2012-01-10 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 2012-04-02 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> create uniqie index ename_id on emp(ename);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uniqie index ename_id on emp(ename)' at line 1
+mysql> create unique index ename_id on emp(ename);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp where sal >2000;
++-------+-------+---------+------+------------+---------+------+--------+
+| EMPNO | ENAME | JOB     | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7698 | BLAKE | MANAGER | 7839 | 2012-01-06 | 2850.00 | NULL |     30 |
+|  7566 | JONES | MANAGER | 7839 | 2013-01-02 | 2975.00 | NULL |     20 |
+|  7788 | SCOTT | ANALYST | 7566 | 2012-01-10 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 2012-04-02 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> create unique index ename_id on emp(ename);
+ERROR 1061 (42000): Duplicate key name 'ename_id'
+mysql> select * from emp_id;
+ERROR 1146 (42S02): Table 'cdac.emp_id' doesn't exist

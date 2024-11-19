@@ -1,0 +1,279 @@
+mysql> select deptno, job, count(empno) as totemp from emp group by deptno, job order by deptno;
++--------+-----------+--------+
+| deptno | job       | totemp |
++--------+-----------+--------+
+|     10 | CLERK     |      1 |
+|     10 | MANAGER   |      1 |
+|     10 | PRESIDENT |      1 |
+|     20 | ANALYST   |      2 |
+|     20 | CLERK     |      2 |
+|     20 | MANAGER   |      1 |
+|     30 | CLERK     |      1 |
+|     30 | MANAGER   |      1 |
+|     30 | SALESMAN  |      4 |
++--------+-----------+--------+
+9 rows in set (0.02 sec)
+
+mysql> select ename, deptno, sal from emp order by deptno, sal, ename;
++--------+--------+---------+
+| ename  | deptno | sal     |
++--------+--------+---------+
+| MILLER |     10 | 1300.00 |
+| CLARK  |     10 | 2450.00 |
+| KING   |     10 | 5000.00 |
+| SMITH  |     20 |  800.00 |
+| ADAMS  |     20 | 1100.00 |
+| JONES  |     20 | 2975.00 |
+| FORD   |     20 | 3000.00 |
+| SCOTT  |     20 | 3000.00 |
+| JAMES  |     30 |  950.00 |
+| MARTIN |     30 | 1250.00 |
+| WARD   |     30 | 1250.00 |
+| TURNER |     30 | 1500.00 |
+| ALLEN  |     30 | 1600.00 |
+| BLAKE  |     30 | 2850.00 |
++--------+--------+---------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT sum(sal) as Total
+    -> FROM emp
+    -> GROUP BY deptno
+    -> HAVING sum(sal) > 1000;
++----------+
+| Total    |
++----------+
+| 10875.00 |
+|  9400.00 |
+|  8750.00 |
++----------+
+3 rows in set (0.01 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_cdac |
++----------------+
+| customer       |
+| dept           |
+| emp            |
+| emp1           |
++----------------+
+4 rows in set (0.03 sec)
+
+mysql> create table dept1(deptno numeric(2) primary key, dname varchar(20) not null, loc varchar(20) not null);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> 
+mysql> 
+mysql> insert into dept1 values(10, 'acct','mumbai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dept1 values(20, 'fin','Nashik');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     10 | acct  | mumbai |
+|     20 | fin   | Nashik |
++--------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> insert into dept1 values(30, 'fin','');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     10 | acct  | mumbai |
+|     20 | fin   | Nashik |
+|     30 | fin   |        |
++--------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into dept1 values(40, 'fin');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     10 | acct  | mumbai |
+|     20 | fin   | Nashik |
+|     30 | fin   |        |
++--------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> show table emp1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp1' at line 1
+mysql> select * from emp1;
++-------+----------+--------+------------+-------------+-----------+
+| empno | ename    | deptno | doj        | sal         | comm      |
++-------+----------+--------+------------+-------------+-----------+
+| e001  | Shrikant |     10 | 2023-12-02 | 20000000.00 |   4012.00 |
+| e002  | Raju     |     20 | 2022-11-03 | 40000000.00 |  25463.00 |
+| e003  | Mohan    |     30 | 2021-01-02 | 30000000.00 | 542456.00 |
++-------+----------+--------+------------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> drop table emp1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show table dept1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept1' at line 1
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     10 | acct  | mumbai |
+|     20 | fin   | Nashik |
+|     30 | fin   |        |
++--------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> CREATE TABLE emp1 (
+    ->   empno numeric(4) Primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) check(sal>10000),
+    -> deptno numeric(2),
+    -> city varchar(20) check (city in ('pune','mumbai','Nashik')),
+    -> pan varchar(20) unique,
+    ->     FOREIGN KEY (deptno) REFERENCES dept1(deptno);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 8
+mysql> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> 
+mysql> CREATE TABLE emp1 (
+    ->   empno numeric(4) Primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) check(sal>10000),
+    -> deptno numeric(2),
+    -> city varchar(20) check (city in ('pune','mumbai','Nashik')),
+    -> pan varchar(20) unique,
+    ->     FOREIGN KEY (deptno) REFERENCES dept1(deptno);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 8
+mysql> 
+mysql> 
+mysql> CREATE TABLE emp1 (
+    ->   empno numeric(4) Primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) check(sal>10000),
+    -> deptno numeric(2),
+    -> city varchar(20) check (city in ('pune','mumbai','Nashik')),
+    -> pan varchar(20) unique,
+    ->     FOREIGN KEY (deptno) REFERENCES dept1(deptno));
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+
+mysql> insert into emp1 values(1,'Rahul',150000,10,'Nashik', p001);
+ERROR 1054 (42S22): Unknown column 'p001' in 'field list'
+mysql> insert into emp1 values(2,'Shrikant',110000,12,'Mumbai', p002);
+ERROR 1054 (42S22): Unknown column 'p002' in 'field list'
+mysql> 
+mysql> insert into emp1 values(1,'Rahul',150000,10,'Nashik', p001);
+ERROR 1054 (42S22): Unknown column 'p001' in 'field list'
+mysql> insert into emp1 values(2,'Shrikant',110000,20,'Mumbai', p002);
+ERROR 1054 (42S22): Unknown column 'p002' in 'field list'
+mysql> insert into emp1 values(1,'Rahul',150000,10,'Nashik');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into emp1 values(2,'Shrikant',110000,20,'Mumbai');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> 
+mysql> 
+mysql> insert into emp1 values(1,'Rahul',150000,10,'Nashik', p001);
+ERROR 1054 (42S22): Unknown column 'p001' in 'field list'
+mysql> insert into emp1 values(2,'Shrikant',110000,20,'Mumbai', p002);
+ERROR 1054 (42S22): Unknown column 'p002' in 'field list'
+mysql> insert into emp1 values(1,'Rahul',150000,10,'Nashik', 'p001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp1 values(2,'Shrikant',110000,20,'Mumbai', 'p002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> ^C
+mysql> select * from dept1;
++--------+-------+--------+
+| deptno | dname | loc    |
++--------+-------+--------+
+|     10 | acct  | mumbai |
+|     20 | fin   | Nashik |
+|     30 | fin   |        |
++--------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from emp1;
++-------+----------+-----------+--------+--------+------+
+| empno | ename    | sal       | deptno | city   | pan  |
++-------+----------+-----------+--------+--------+------+
+|     1 | Rahul    | 150000.00 |     10 | Nashik | p001 |
+|     2 | Shrikant | 110000.00 |     20 | Mumbai | p002 |
++-------+----------+-----------+--------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> drop table emp1;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE emp1 (
+    ->   empno numeric(4) Primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2) check(sal>10000),
+    -> deptno numeric(2),
+    -> city varchar(20) default 'nashik',
+    -> pan varchar(20) unique,
+    ->     FOREIGN KEY (deptno) REFERENCES dept1(deptno));
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> desc emp1;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| empno  | decimal(4,0) | NO   | PRI | NULL    |       |
+| ename  | varchar(20)  | NO   |     | NULL    |       |
+| sal    | float(10,2)  | YES  |     | NULL    |       |
+| deptno | decimal(2,0) | YES  | MUL | NULL    |       |
+| city   | varchar(20)  | YES  |     | nashik  |       |
+| pan    | varchar(20)  | YES  | UNI | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+6 rows in set (0.03 sec)
+
+mysql> drop table emp1;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE emp1 (
+    ->   empno varchar(4) check (empno like 'e%')Primary key,
+    -> ename varchar(20) not null,
+    -> sal float(10,2)not null 
+    ->  check(sal>10000),
+    -> deptno numeric(2),
+    -> city varchar(20) default 'nashik',
+    -> check (city in ('pune', 'nashik', 'Mum')),
+    -> pan varchar(20) unique,
+    ->     FOREIGN KEY (deptno) REFERENCES dept1(deptno));
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+mysql> insert into emp1 values('e001','Rahul',150000,10,default, 'p001');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp1 values('e002','Shrikant',110000,20,'Mumbai', 'p002');
+ERROR 3819 (HY000): Check constraint 'emp1_chk_3' is violated.
+mysql> ^C
+mysql> select * from emp1;
++-------+-------+-----------+--------+--------+------+
+| empno | ename | sal       | deptno | city   | pan  |
++-------+-------+-----------+--------+--------+------+
+| e001  | Rahul | 150000.00 |     10 | nashik | p001 |
++-------+-------+-----------+--------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into emp1 values('e002','Shrikant',110000,20,'Mum', 'p002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp1;
++-------+----------+-----------+--------+--------+------+
+| empno | ename    | sal       | deptno | city   | pan  |
++-------+----------+-----------+--------+--------+------+
+| e001  | Rahul    | 150000.00 |     10 | nashik | p001 |
+| e002  | Shrikant | 110000.00 |     20 | Mum    | p002 |
++-------+----------+-----------+--------+--------+------+
+2 rows in set (0.00 sec)
+

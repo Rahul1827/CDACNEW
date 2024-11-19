@@ -1,0 +1,26 @@
+package Inheritance;
+
+class Derived1 extends SingleInheritance{
+	
+	
+	private int p,q,ans;
+	
+	void  GetInfo(int x, int y)
+	{
+		
+		
+		p=x;
+		q=y;
+		ans=(p*q)+c;
+	}
+	 
+	 public void show()
+	 {
+		 
+		 
+		 System.out.println("Derived class Answer"+ans);
+	 }
+	
+	
+}
+

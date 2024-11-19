@@ -1,0 +1,29 @@
+package Inheritance;
+
+public class SingleInheritance {
+	
+	private int a,b;
+	protected int c;
+	
+	
+	void Get(int x, int y)
+	{
+		
+		a=x;
+		b=y;
+		c=a+b;
+		
+		
+	}
+	
+         void show_data()	
+         {
+        	 System.out.println("Addition is ="+c);
+        	 
+        	 
+        	 
+         }
+	
+	
+
+}

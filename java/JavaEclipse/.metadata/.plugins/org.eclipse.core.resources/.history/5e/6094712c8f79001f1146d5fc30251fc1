@@ -1,0 +1,29 @@
+package My_class_pac;
+
+public class Constructor {
+
+	private
+	int a;
+	float b;
+	public
+	
+	Constructor()
+	{
+		
+		a=45;
+		b=50.21f;
+		
+		
+		
+	}
+	
+	void Show()
+
+	{
+		
+		System.out.println("A is ="+a);
+		System.out.println("B is ="+b);
+		
+	}
+	
+}

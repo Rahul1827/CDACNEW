@@ -1,0 +1,11 @@
+package Task;
+
+public class A {
+	
+	public 
+	void show()
+
+	{
+		System.out.println("show A");
+	}
+}

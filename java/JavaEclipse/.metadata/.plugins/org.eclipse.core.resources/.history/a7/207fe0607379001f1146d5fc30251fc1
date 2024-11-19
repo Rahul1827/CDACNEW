@@ -1,0 +1,28 @@
+package My_class_pac;
+
+public class Employee {
+	
+	
+	private
+	int empid;
+	String name;
+	double salary;
+	
+	public 
+	void Set_data(int id, String na, double sal)
+	{
+		empid=id;
+		name=na;
+		salary=sal;
+		
+	}
+	
+	void show()
+	{
+		System.out.println("Employee Id is ="+empid);
+		System.out.println("Employee Name is ="+name);
+		System.out.println("Employee Salary is ="+salary);
+	}
+	
+
+}

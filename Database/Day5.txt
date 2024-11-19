@@ -1,0 +1,160 @@
+create table emp2 (empno int, ename varchar(20),sal int);
+
+
+insert into emp2  values(1,'Rahul', 50000);
+insert into emp2  values(2,'Shrikant', 60000);
+savepoint a;
+
+insert into emp2  values(3,'Rahul', 50000);
+insert into emp2  values(4,'Shrikant', 60000);
+savepoint b;
+
+insert into emp2  values(5,'Rahul', 50000);
+insert into emp2  values(6,'Shrikant', 60000);
+rollback to b;
+
+
+insert into emp2  values(7,'Rahul', 50000);
+roolback to a;
+
+insert into emp2  values(8,'Shrikant', 60000);
+insert into emp2  values(9,'Rahul', 50000);
+commit;
+
+
+select * from emp2;
+
+
+
+create table emp4(empno int auto_increment primary key, ename varchar(20),sal int);
+
+insert into emp5 values(default,'Rahul', 50000);
+insert into emp5  values(default,'Shrikant', 60000);
+
+insert into emp5 values(default,'Akshay', 50000);
+insert into emp5  values(default,'pradeep', 60000);
+
+insert into emp5 values(default,'Yash', 50000);
+insert into emp5  values(default,'pritam', 60000);
+
+
+
+
+create table present_bike(modelno int, color varchar(20));
+
+
+insert into present_bike values(1,'red');
+insert into present_bike values('2',black');
+
+
+create table ()
+
+create table sold_bike(modelno int, color varchar(20));
+
+insert into present_bike values(1,'red');
+insert into present_bike values('3',blue');
+
+select * from present_bike
+union 
+select * from sold_bike;
+
+
+
+select ename, sal, row_number() over (order by sal desc) ranking from emp;
+
+select ename, sal, rank() over (order by sal desc) ranking from emp;
+
+select ename, sal, dense_rank() over (order by sal desc) ranking from emp;
+
+
+
+select ename, ranking from
+(select ename, sal, dense_rank() over (order by sal desc) ranking from emp)
+where ranking =1;
+
+
+select ename, ranking from
+(select ename, sal, dense_rank() over (order by sal desc) ranking from emp)
+where ranking <=2;
+
+
+select ename, ranking from
+(select ename, sal, dense_rank() over (order by sal desc) ranking from emp)
+where ranking <=5;
+
+
+=================================================================
+select replace('Rahul', 'v', u);
+select rtrim('                          Rahul                                 ');
+select ltrim('                          Rahul                                 ');
+select lpad('Rahul',10,'*');
+select rpad('Rahul',10,'*');
+
+select substr('Rahul',2);
+select substr('Rahul',5,2);
+select instr('Rahul','h');
+
+=================================================================
+select sqrt(144);
+select round(12345.456,2);
+select ceil(1254.25);
+select floor(45456.365);
+select abs(-88);
+select sign(-88);
+select pow(5,5);
+select round(123.678,2);
+select round(132564.546,1);
+select round(7897.5657,0);
+select round(1325.546,-1);
+select round(78989.789789,-1);
+select round(987456.78,-2);
+select round(789.7,-3);
+select format(1234.5565,2);
+select truncate (123.427,2);
+================================================================
+select sysdate();
+select curdate();
+select curtime();
+select now();
+select datediff('2024-12-26',curdate());
+select date_format('2024-10-26', '%M');
+select date_format('2024-10-26','%m');
+select date_format('2024-10-26','%D');
+select date_format('2024-10-26','%d');
+select date_format('2024-10-26','%Y');
+select date_format('2024-10-26','%y');
+select date_format('2024-10-26','%h');
+select date_format('2024-10-26','%d/%m/%Y/%h');
+
+select ename , hiredate, round(datediff(hiredate, curdate())/30)exp from emp;
+
+
+select ename from emp where job=
+(select job from emp where ename='smith')
+and ename !='smith';
+
+
+SELECT ename , sal
+FROM emp 
+WHERE sal > (SELECT AVG(sal) AS average_salary FROM emp);
+
+select ename from emp where deptno=(select deptno from dept where dname='accounting');
+select ename from emp where deptno=(select deptno from dept where dname='Research');
+select ename from emp where deptno=(select deptno from dept where loc='new york');
+select ename from emp where deptno=(select deptno from dept where loc='chicago');
+
+
+
+select ename , job from emp  where job in 
+(select job from emp where job not in  ('clerk', 'salesman'));
+
+
+select ename , sal from emp where sal >all (select sal from emp where deptno=20);
+
+
+select ename, sal 
+from emp 
+where sal > (select max(sal) from emp where deptno = 20)
+
+
+select * from dept where not exists(select * from emp where emp.deptno= dept.deptno);

@@ -1,0 +1,34 @@
+<script>
+   // ===============Synchronous Programming=================
+    console.log("start");
+
+const fetchData =()=>{
+
+    console.log("long task.....");
+    
+}
+    fetchData();
+    console.log("end");
+    
+
+      // ===============ASynchronous Programming=================
+
+      console.log("===============ASynchronous Programming=================");
+     
+      console.log("start");
+
+const fetchData1 =()=>{
+    setTimeout(() => {
+    console.log("long task.....");
+        
+    }, 10000);
+
+    
+}
+    fetchData1();
+    console.log("end");
+      
+
+
+    
+</script>

@@ -1,0 +1,21 @@
+package My_class_pac;
+
+public class point {
+	
+	private
+	int a;
+	float b;
+	boolean c;
+	String s;
+	public 
+	void show()
+	{
+		
+		System.out.println("A="+a);
+		System.out.println("B"+b);
+		System.out.println("C"+c);
+		System.out.println("String="+s);
+	}
+	
+
+}

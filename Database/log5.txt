@@ -1,0 +1,1243 @@
+mysql> use cdac;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_cdac |
++----------------+
+| customer       |
+| dept           |
+| dept1          |
+| emp            |
+| emp1           |
+| newemp2        |
+| v1             |
+| v2             |
+| v3             |
+| v4             |
++----------------+
+10 rows in set (0.04 sec)
+
+mysql> create table emp2 (empno int, ename varchar(20),sal int);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> 
+mysql> 
+mysql> insert into emp2  values(1,'Rahul', 50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp2  values(2,'Shrikant', 60000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> 
+mysql> 
+mysql> select * from emp2;
++-------+----------+-------+
+| empno | ename    | sal   |
++-------+----------+-------+
+|     1 | Rahul    | 50000 |
+|     2 | Shrikant | 60000 |
++-------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> truncate table emp2;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into emp2  values(1,'Rahul', 50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp2  values(2,'Shrikant', 60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp2;
++-------+----------+-------+
+| empno | ename    | sal   |
++-------+----------+-------+
+|     1 | Rahul    | 50000 |
+|     2 | Shrikant | 60000 |
++-------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from emp2;
+Empty set (0.00 sec)
+
+mysql> insert into emp2  values(1,'Rahul', 50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp2;
++-------+-------+-------+
+| empno | ename | sal   |
++-------+-------+-------+
+|     1 | Rahul | 50000 |
++-------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into emp2  values(2,'Shrikant', 60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from emp2;
++-------+----------+-------+
+| empno | ename    | sal   |
++-------+----------+-------+
+|     1 | Rahul    | 50000 |
+|     2 | Shrikant | 60000 |
++-------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_cdac |
++----------------+
+| customer       |
+| dept           |
+| dept1          |
+| emp            |
+| emp1           |
+| emp2           |
+| newemp2        |
+| v1             |
+| v2             |
+| v3             |
+| v4             |
++----------------+
+11 rows in set (0.00 sec)
+
+mysql> 
+mysql> create table emp2 (empno int auto_increment primary key, ename varchar(20),sal int);
+ERROR 1050 (42S01): Table 'emp2' already exists
+mysql> create table emp4 (empno int auto_increment primary key, ename varchar(20),sal int);
+ERROR 1050 (42S01): Table 'emp4' already exists
+mysql> create table emp5 (empno int auto_increment primary key, ename varchar(20),sal int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into emp5 values(default,'Rahul', 50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp5  values(default,'Shrikant', 60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp5;
++-------+----------+-------+
+| empno | ename    | sal   |
++-------+----------+-------+
+|     1 | Rahul    | 50000 |
+|     2 | Shrikant | 60000 |
++-------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into emp5 values(default,'Akshay', 50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp5  values(default,'pradeep', 60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> 
+mysql> insert into emp5 values(default,'Yash', 50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp5  values(default,'pritam', 60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp5;
++-------+----------+-------+
+| empno | ename    | sal   |
++-------+----------+-------+
+|     1 | Rahul    | 50000 |
+|     2 | Shrikant | 60000 |
+|     3 | Akshay   | 50000 |
+|     4 | pradeep  | 60000 |
+|     5 | Yash     | 50000 |
+|     6 | pritam   | 60000 |
++-------+----------+-------+
+6 rows in set (0.00 sec)
+
+mysql> 
+mysql> select ename, sal, row_number() over (order by sal desc) ranking from emp;
++--------+---------+---------+
+| ename  | sal     | ranking |
++--------+---------+---------+
+| SCOTT  | 3000.00 |       1 |
+| FORD   | 3000.00 |       2 |
+| JONES  | 2975.00 |       3 |
+| BLAKE  | 2850.00 |       4 |
+| ALLEN  | 1600.00 |       5 |
+| TURNER | 1500.00 |       6 |
+| WARD   | 1250.00 |       7 |
+| MARTIN | 1250.00 |       8 |
+| NULL   | 1200.00 |       9 |
+| ADAMS  | 1100.00 |      10 |
+| JAMES  |  950.00 |      11 |
+| SMITH  |  800.00 |      12 |
++--------+---------+---------+
+12 rows in set (0.01 sec)
+
+mysql> 
+mysql> select ename, sal, rank() over (order by sal desc) ranking from emp;
++--------+---------+---------+
+| ename  | sal     | ranking |
++--------+---------+---------+
+| SCOTT  | 3000.00 |       1 |
+| FORD   | 3000.00 |       1 |
+| JONES  | 2975.00 |       3 |
+| BLAKE  | 2850.00 |       4 |
+| ALLEN  | 1600.00 |       5 |
+| TURNER | 1500.00 |       6 |
+| WARD   | 1250.00 |       7 |
+| MARTIN | 1250.00 |       7 |
+| NULL   | 1200.00 |       9 |
+| ADAMS  | 1100.00 |      10 |
+| JAMES  |  950.00 |      11 |
+| SMITH  |  800.00 |      12 |
++--------+---------+---------+
+12 rows in set (0.00 sec)
+
+mysql> 
+mysql> select ename, sal, dense_rank() over (order by sal desc) ranking from emp;
++--------+---------+---------+
+| ename  | sal     | ranking |
++--------+---------+---------+
+| SCOTT  | 3000.00 |       1 |
+| FORD   | 3000.00 |       1 |
+| JONES  | 2975.00 |       2 |
+| BLAKE  | 2850.00 |       3 |
+| ALLEN  | 1600.00 |       4 |
+| TURNER | 1500.00 |       5 |
+| WARD   | 1250.00 |       6 |
+| MARTIN | 1250.00 |       6 |
+| NULL   | 1200.00 |       7 |
+| ADAMS  | 1100.00 |       8 |
+| JAMES  |  950.00 |       9 |
+| SMITH  |  800.00 |      10 |
++--------+---------+---------+
+12 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> select lcase('CDAC');
++---------------+
+| lcase('CDAC') |
++---------------+
+| cdac          |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select ucase('CDAC');
++---------------+
+| ucase('CDAC') |
++---------------+
+| CDAC          |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select lcase(ucase('CDAC'));
++----------------------+
+| lcase(ucase('CDAC')) |
++----------------------+
+| cdac                 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select ascii('ABCD');
++---------------+
+| ascii('ABCD') |
++---------------+
+|            65 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select concat('rahul','patil');
++-------------------------+
+| concat('rahul','patil') |
++-------------------------+
+| rahulpatil              |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> select concat('rahul',' ''patil');
++----------------------------+
+| concat('rahul',' ''patil') |
++----------------------------+
+| rahul 'patil               |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select concat('rahul', 'patil');
++--------------------------+
+| concat('rahul', 'patil') |
++--------------------------+
+| rahulpatil               |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select concat('rahul','' 'patil');
++----------------------------+
+| concat('rahul','' 'patil') |
++----------------------------+
+| rahulpatil                 |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select concat (ename, 'is a ', job, 'earns salary:', sal)from emp;
++----------------------------------------------------+
+| concat (ename, 'is a ', job, 'earns salary:', sal) |
++----------------------------------------------------+
+| NULL                                               |
+| SMITHis a CLERKearns salary:800.00                 |
+| ALLENis a SALESMANearns salary:1600.00             |
+| WARDis a SALESMANearns salary:1250.00              |
+| JONESis a MANAGERearns salary:2975.00              |
+| MARTINis a SALESMANearns salary:1250.00            |
+| BLAKEis a MANAGERearns salary:2850.00              |
+| SCOTTis a ANALYSTearns salary:3000.00              |
+| TURNERis a SALESMANearns salary:1500.00            |
+| ADAMSis a CLERKearns salary:1100.00                |
+| JAMESis a CLERKearns salary:950.00                 |
+| FORDis a ANALYSTearns salary:3000.00               |
++----------------------------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat (ename, 'hire date is  ', hiredate)from emp;
++--------------------------------------------+
+| concat (ename, 'hire date is  ', hiredate) |
++--------------------------------------------+
+| NULL                                       |
+| SMITHhire date is  2012-02-02              |
+| ALLENhire date is  2012-01-02              |
+| WARDhire date is  2013-01-02               |
+| JONEShire date is  2013-01-02              |
+| MARTINhire date is  2012-05-02             |
+| BLAKEhire date is  2012-01-06              |
+| SCOTThire date is  2012-01-10              |
+| TURNERhire date is  2012-01-20             |
+| ADAMShire date is  2013-01-02              |
+| JAMEShire date is  2012-03-02              |
+| FORDhire date is  2012-04-02               |
++--------------------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat (ename, ' hire date is  ', hiredate)from emp;
++---------------------------------------------+
+| concat (ename, ' hire date is  ', hiredate) |
++---------------------------------------------+
+| NULL                                        |
+| SMITH hire date is  2012-02-02              |
+| ALLEN hire date is  2012-01-02              |
+| WARD hire date is  2013-01-02               |
+| JONES hire date is  2013-01-02              |
+| MARTIN hire date is  2012-05-02             |
+| BLAKE hire date is  2012-01-06              |
+| SCOTT hire date is  2012-01-10              |
+| TURNER hire date is  2012-01-20             |
+| ADAMS hire date is  2013-01-02              |
+| JAMES hire date is  2012-03-02              |
+| FORD hire date is  2012-04-02               |
++---------------------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat (ename, ' joined on   ', hiredate)from emp;
++-------------------------------------------+
+| concat (ename, ' joined on   ', hiredate) |
++-------------------------------------------+
+| NULL                                      |
+| SMITH joined on   2012-02-02              |
+| ALLEN joined on   2012-01-02              |
+| WARD joined on   2013-01-02               |
+| JONES joined on   2013-01-02              |
+| MARTIN joined on   2012-05-02             |
+| BLAKE joined on   2012-01-06              |
+| SCOTT joined on   2012-01-10              |
+| TURNER joined on   2012-01-20             |
+| ADAMS joined on   2013-01-02              |
+| JAMES joined on   2012-03-02              |
+| FORD joined on   2012-04-02               |
++-------------------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select replace('Rahul', 'v', u);
+ERROR 1054 (42S22): Unknown column 'u' in 'field list'
+mysql> select rtrim('                          Rahul                                 ');
++---------------------------------------------------------------------------+
+| rtrim('                          Rahul                                 ') |
++---------------------------------------------------------------------------+
+|                           Rahul                                           |
++---------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select ltrim('                          Rahul                                 ');
++---------------------------------------------------------------------------+
+| ltrim('                          Rahul                                 ') |
++---------------------------------------------------------------------------+
+| Rahul                                                                     |
++---------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select lpad('Rahul',10,'*');
++----------------------+
+| lpad('Rahul',10,'*') |
++----------------------+
+| *****Rahul           |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select rpad('Rahul',10,'*');
++----------------------+
+| rpad('Rahul',10,'*') |
++----------------------+
+| Rahul*****           |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select lpad('rpad('Rahul',10,'*'),14,'*');
+    '> select substr('Rahul',2);
+    '> select substr('Rahul',5,2);
+    '> select instr('Rahul',h);
+    '> 
+    '> ^C
+mysql> select lpad('rpad('Rahul',10,'*'),14,'*');
+    '> select substr('Rahul',2);
+    '> select substr('Rahul',5,2);
+    '> select instr('Rahul',h);
+    '> 
+    '> ^C
+mysql> select lpad('rpad('Rahul',5,'*'),10,'*');
+    '> select substr('Rahul',2);
+    '> select substr('Rahul',5,2);
+    '> select instr('Rahul',h);
+    '> ^C
+mysql> 
+mysql> select substr('Rahul',2);
++-------------------+
+| substr('Rahul',2) |
++-------------------+
+| ahul              |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select substr('Rahul',5,2);
++---------------------+
+| substr('Rahul',5,2) |
++---------------------+
+| l                   |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select instr('Rahul',h);
+ERROR 1054 (42S22): Unknown column 'h' in 'field list'
+mysql> select replace('Rahul', 'v', u);
+ERROR 1054 (42S22): Unknown column 'u' in 'field list'
+mysql> select rtrim('                          Rahul                                 ');
++---------------------------------------------------------------------------+
+| rtrim('                          Rahul                                 ') |
++---------------------------------------------------------------------------+
+|                           Rahul                                           |
++---------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select ltrim('                          Rahul                                 ');
++---------------------------------------------------------------------------+
+| ltrim('                          Rahul                                 ') |
++---------------------------------------------------------------------------+
+| Rahul                                                                     |
++---------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select lpad('Rahul',10,'*');
++----------------------+
+| lpad('Rahul',10,'*') |
++----------------------+
+| *****Rahul           |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select rpad('Rahul',10,'*');
++----------------------+
+| rpad('Rahul',10,'*') |
++----------------------+
+| Rahul*****           |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> select substr('Rahul',2);
++-------------------+
+| substr('Rahul',2) |
++-------------------+
+| ahul              |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select substr('Rahul',5,2);
++---------------------+
+| substr('Rahul',5,2) |
++---------------------+
+| l                   |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select instr('Rahul','h');
++--------------------+
+| instr('Rahul','h') |
++--------------------+
+|                  3 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(144);
++-----------+
+| sqrt(144) |
++-----------+
+|        12 |
++-----------+
+1 row in set (0.01 sec)
+
+mysql> select round(12345.456,2);
++--------------------+
+| round(12345.456,2) |
++--------------------+
+|           12345.46 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(1254.25);
++---------------+
+| ceil(1254.25) |
++---------------+
+|          1255 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(45456.365);
++------------------+
+| floor(45456.365) |
++------------------+
+|            45456 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select abs(-88);
++----------+
+| abs(-88) |
++----------+
+|       88 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sign(-88);
++-----------+
+| sign(-88) |
++-----------+
+|        -1 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(144);
++-----------+
+| sqrt(144) |
++-----------+
+|        12 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select round(12345.456,2);
++--------------------+
+| round(12345.456,2) |
++--------------------+
+|           12345.46 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(1254.25);
++---------------+
+| ceil(1254.25) |
++---------------+
+|          1255 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(45456.365);
++------------------+
+| floor(45456.365) |
++------------------+
+|            45456 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select abs(-88);
++----------+
+| abs(-88) |
++----------+
+|       88 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sign(-88);
++-----------+
+| sign(-88) |
++-----------+
+|        -1 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select pow(5,5);
++----------+
+| pow(5,5) |
++----------+
+|     3125 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select round(123.678,2);
++------------------+
+| round(123.678,2) |
++------------------+
+|           123.68 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(132564.546,1);
++---------------------+
+| round(132564.546,1) |
++---------------------+
+|            132564.5 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(7897.5657,0);
++--------------------+
+| round(7897.5657,0) |
++--------------------+
+|               7898 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(1325.546,-1);
++--------------------+
+| round(1325.546,-1) |
++--------------------+
+|               1330 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(78989.789789,-1);
++------------------------+
+| round(78989.789789,-1) |
++------------------------+
+|                  78990 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(987456.78,-2);
++---------------------+
+| round(987456.78,-2) |
++---------------------+
+|              987500 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(789.7,-3);
++-----------------+
+| round(789.7,-3) |
++-----------------+
+|            1000 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select format(1234.5565,2);
++---------------------+
+| format(1234.5565,2) |
++---------------------+
+| 1,234.56            |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select truncate (123,427,2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',2)' at line 1
+mysql> select truncate (123.427,2);
++----------------------+
+| truncate (123.427,2) |
++----------------------+
+|               123.42 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(144);
++-----------+
+| sqrt(144) |
++-----------+
+|        12 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select round(12345.456,2);
++--------------------+
+| round(12345.456,2) |
++--------------------+
+|           12345.46 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(1254.25);
++---------------+
+| ceil(1254.25) |
++---------------+
+|          1255 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(45456.365);
++------------------+
+| floor(45456.365) |
++------------------+
+|            45456 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select abs(-88);
++----------+
+| abs(-88) |
++----------+
+|       88 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sign(-88);
++-----------+
+| sign(-88) |
++-----------+
+|        -1 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select pow(5,5);
++----------+
+| pow(5,5) |
++----------+
+|     3125 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select round(123.678,2);
++------------------+
+| round(123.678,2) |
++------------------+
+|           123.68 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(132564.546,1);
++---------------------+
+| round(132564.546,1) |
++---------------------+
+|            132564.5 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(7897.5657,0);
++--------------------+
+| round(7897.5657,0) |
++--------------------+
+|               7898 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(1325.546,-1);
++--------------------+
+| round(1325.546,-1) |
++--------------------+
+|               1330 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(78989.789789,-1);
++------------------------+
+| round(78989.789789,-1) |
++------------------------+
+|                  78990 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(987456.78,-2);
++---------------------+
+| round(987456.78,-2) |
++---------------------+
+|              987500 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(789.7,-3);
++-----------------+
+| round(789.7,-3) |
++-----------------+
+|            1000 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select format(1234.5565,2);
++---------------------+
+| format(1234.5565,2) |
++---------------------+
+| 1,234.56            |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select truncate (123.427,2);
++----------------------+
+| truncate (123.427,2) |
++----------------------+
+|               123.42 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26', %d-%m-%y);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%d-%m-%y)' at line 1
+mysql> select date_format('2024-10-26', %d%m%y);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%d%m%y)' at line 1
+mysql> select date_format('2024-10-26', '%d%m%y');
++-------------------------------------+
+| date_format('2024-10-26', '%d%m%y') |
++-------------------------------------+
+| 261024                              |
++-------------------------------------+
+1 row in set (0.01 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2024-10-26 16:00:30 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2024-10-26 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 16:00:30  |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2024-10-26 16:00:30 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff('2024-12-26',curdate());
++----------------------------------+
+| datediff('2024-12-26',curdate()) |
++----------------------------------+
+|                               61 |
++----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26', '%M');
++---------------------------------+
+| date_format('2024-10-26', '%M') |
++---------------------------------+
+| October                         |
++---------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26','%m');
++--------------------------------+
+| date_format('2024-10-26','%m') |
++--------------------------------+
+| 10                             |
++--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26','%D');
++--------------------------------+
+| date_format('2024-10-26','%D') |
++--------------------------------+
+| 26th                           |
++--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26','%d');
++--------------------------------+
+| date_format('2024-10-26','%d') |
++--------------------------------+
+| 26                             |
++--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26','%Y');
++--------------------------------+
+| date_format('2024-10-26','%Y') |
++--------------------------------+
+| 2024                           |
++--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26','%y');
++--------------------------------+
+| date_format('2024-10-26','%y') |
++--------------------------------+
+| 24                             |
++--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26','%h');
++--------------------------------+
+| date_format('2024-10-26','%h') |
++--------------------------------+
+| 12                             |
++--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format('2024-10-26','%d/%m/%Y/%h');
++-----------------------------------------+
+| date_format('2024-10-26','%d/%m/%Y/%h') |
++-----------------------------------------+
+| 26/10/2024/12                           |
++-----------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ename,
+    ->        FLOOR(MONTHS_BETWEEN(SYSDATE, hiredate) / 12) AS experience_years
+    -> FROM emp
+    -> WHERE hiredate = TO_DATE('10/03/2012', 'MM/DD/YYYY');
+ERROR 1305 (42000): FUNCTION cdac.MONTHS_BETWEEN does not exist
+mysql> 
+mysql> select ename , hiredate, round(datediff(hiredate, cudate))/360)exp from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')exp from emp' at line 1
+mysql> select ename , hiredate, round(datediff(hiredate, cudate)/360)exp from emp;
+ERROR 1054 (42S22): Unknown column 'cudate' in 'field list'
+mysql> 
+mysql> select ename , hiredate, round(datediff(hiredate, curdate)/360)exp from emp;
+ERROR 1054 (42S22): Unknown column 'curdate' in 'field list'
+mysql> select ename , hiredate, round(datediff(hiredate, curdate))/360)exp from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')exp from emp' at line 1
+mysql> select ename , hiredate, round(datediff(hiredate, curdate)/365)exp from emp;
+ERROR 1054 (42S22): Unknown column 'curdate' in 'field list'
+mysql> select ename , hiredate, round(datediff(hiredate, curdate()/365)exp from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp' at line 1
+mysql> select ename , hiredate, round(datediff(hiredate, curdate())/365)exp from emp;
++--------+------------+------+
+| ename  | hiredate   | exp  |
++--------+------------+------+
+| NULL   | 2024-02-02 |   -1 |
+| SMITH  | 2012-02-02 |  -13 |
+| ALLEN  | 2012-01-02 |  -13 |
+| WARD   | 2013-01-02 |  -12 |
+| JONES  | 2013-01-02 |  -12 |
+| MARTIN | 2012-05-02 |  -12 |
+| BLAKE  | 2012-01-06 |  -13 |
+| SCOTT  | 2012-01-10 |  -13 |
+| TURNER | 2012-01-20 |  -13 |
+| ADAMS  | 2013-01-02 |  -12 |
+| JAMES  | 2012-03-02 |  -13 |
+| FORD   | 2012-04-02 |  -13 |
++--------+------------+------+
+12 rows in set (0.00 sec)
+
+mysql> select ename , hiredate, round(datediff(hiredate, curdate())/30)exp from emp;
++--------+------------+------+
+| ename  | hiredate   | exp  |
++--------+------------+------+
+| NULL   | 2024-02-02 |   -9 |
+| SMITH  | 2012-02-02 | -155 |
+| ALLEN  | 2012-01-02 | -156 |
+| WARD   | 2013-01-02 | -144 |
+| JONES  | 2013-01-02 | -144 |
+| MARTIN | 2012-05-02 | -152 |
+| BLAKE  | 2012-01-06 | -156 |
+| SCOTT  | 2012-01-10 | -156 |
+| TURNER | 2012-01-20 | -155 |
+| ADAMS  | 2013-01-02 | -144 |
+| JAMES  | 2012-03-02 | -154 |
+| FORD   | 2012-04-02 | -153 |
++--------+------------+------+
+12 rows in set (0.00 sec)
+
+mysql> select ename from emp where job=
+    -> (select job from emp where ename='smith')
+    -> and ename !='smith';
++-------+
+| ename |
++-------+
+| ADAMS |
+| JAMES |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> 
+mysql> select ename from emp where sal >
+    -> (select salary Avg(sal) as average salary from emp);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(sal) as average salary from emp)' at line 2
+mysql> select ename from emp where sal >
+    -> (select salary Avg('sal') as average salary from emp);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('sal') as average salary from emp)' at line 2
+mysql> select * from emp;
++-------+--------+----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+----------+------+------------+---------+---------+--------+
+|     1 | NULL   | manager  | NULL | 2024-02-02 | 1200.00 |    NULL |     10 |
+|  7369 | SMITH  | CLERK    | 7902 | 2012-02-02 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 2012-01-02 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 2013-01-02 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 2013-01-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 2012-05-02 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER  | 7839 | 2012-01-06 | 2850.00 |    NULL |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 2012-01-10 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 2012-01-20 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 2013-01-02 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK    | 7698 | 2012-03-02 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST  | 7566 | 2012-04-02 | 3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select ename from emp where sal >
+    -> (select salAvg('sal') as average salary from emp);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'salary from emp)' at line 2
+mysql> 
+mysql> select ename from emp where sal >
+    -> (select salAvg(sal) as average salary from emp);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'salary from emp)' at line 2
+mysql> SELECT ename 
+    -> FROM emp 
+    -> WHERE sal > (SELECT AVG(sal) AS average_salary FROM emp);
++-------+
+| ename |
++-------+
+| BLAKE |
+| JONES |
+| SCOTT |
+| FORD  |
++-------+
+4 rows in set (0.00 sec)
+
+mysql> 
+mysql> SELECT ename , sal
+    -> FROM emp 
+    -> WHERE sal > (SELECT AVG(sal) AS average_salary FROM emp);
++-------+---------+
+| ename | sal     |
++-------+---------+
+| BLAKE | 2850.00 |
+| JONES | 2975.00 |
+| SCOTT | 3000.00 |
+| FORD  | 3000.00 |
++-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from  deptno;
+ERROR 1146 (42S02): Table 'cdac.deptno' doesn't exist
+mysql> select * from  dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.02 sec)
+
+mysql> select ename from emp where deptno=(select deptno from emp where dname='accounting');
+ERROR 1054 (42S22): Unknown column 'dname' in 'where clause'
+mysql> select ename from emp where deptno=(select deptno from dept where dname='accounting');
++-------+
+| ename |
++-------+
+| NULL  |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select ename from emp where deptno=(select deptno from dept where dname='Research');
++-------+
+| ename |
++-------+
+| SMITH |
+| JONES |
+| SCOTT |
+| ADAMS |
+| FORD  |
++-------+
+5 rows in set (0.00 sec)
+
+mysql> select ename from emp where deptno=(select deptno from dept where loc='newyork');
+Empty set (0.00 sec)
+
+mysql> select ename from emp where deptno=(select deptno from dept where loc='new york');
++-------+
+| ename |
++-------+
+| NULL  |
++-------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> select ename from emp where deptno=(select deptno from dept where loc='chicago');
++--------+
+| ename  |
++--------+
+| ALLEN  |
+| WARD   |
+| MARTIN |
+| BLAKE  |
+| TURNER |
+| JAMES  |
++--------+
+6 rows in set (0.00 sec)
+
+mysql> select ename from emp where job=
+    -> (select job from emp where ename='smith' &&  ename='allen');
+Empty set, 1 warning (0.00 sec)
+
+mysql> 
+mysql> select ename from emp where job=
+    -> (select job from emp where job='clerk' &&  job='salesman');
+Empty set, 1 warning (0.00 sec)
+
+mysql> select ename from emp where job=
+    -> (select job from emp where job='clerk' );
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select ename from emp where job=
+    -> (select ename from emp where job='clerk' );
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select ename from emp ename=
+    -> (select ename from emp where job='clerk' );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=
+(select ename from emp where job='clerk' )' at line 1
+mysql> 
+mysql> select ename from emp ename=
+    -> (select ename from emp where job='clerk' );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=
+(select ename from emp where job='clerk' )' at line 1
+mysql> select ename , job from emp  where job in 
+    -> (select ename from emp where job in ('clerk', 'salesman'));
+Empty set (0.01 sec)
+
+mysql> select ename , job from emp  where job in 
+    -> (select job from emp where job in ('clerk', 'salesman'));
++--------+----------+
+| ename  | job      |
++--------+----------+
+| ALLEN  | SALESMAN |
+| WARD   | SALESMAN |
+| MARTIN | SALESMAN |
+| TURNER | SALESMAN |
+| SMITH  | CLERK    |
+| ADAMS  | CLERK    |
+| JAMES  | CLERK    |
++--------+----------+
+7 rows in set (0.02 sec)
+
+mysql> 
+mysql> 
+mysql> select ename , job from emp  where job in 
+    -> (select job from emp where job in != ('clerk', 'salesman'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '!= ('clerk', 'salesman'))' at line 2
+mysql> select ename , job from emp  where job !=
+    -> (select job from emp where job in ('clerk', 'salesman'));
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select ename , job from emp  where job in 
+    -> (select job from emp where job not in  ('clerk', 'salesman'));
++-------+---------+
+| ename | job     |
++-------+---------+
+| NULL  | manager |
+| JONES | MANAGER |
+| BLAKE | MANAGER |
+| SCOTT | ANALYST |
+| FORD  | ANALYST |
++-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select ename , sal from emp where sal > all (select sal from emp where deptno=20);)
+Empty set (0.00 sec)
+
+    -> select ename , sal from emp where sal > all (select sal from emp where deptno=20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+select ename , sal from emp where sal > all (select sal from emp where deptno=' at line 1
+mysql> select ename, sal 
+    -> from emp 
+    -> where sal > (select max(sal) from emp where deptno = 20);
+Empty set (0.00 sec)
+
+mysql> 
+mysql> select ename , sal from emp where sal > all (select sal from emp where deptno=20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select ename , sal from emp where sal > all (select sal from emp where deptno=20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select ename , sal from emp where sal > all (select sal from emp where deptno=20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> 
+mysql> select ename, sal 
+    -> from emp 
+    -> where sal > (select max(sal) from emp where deptno = 20);
+Empty set (0.00 sec)
+
+mysql> where sal = (select max(sal) from emp where deptno = 20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where sal = (select max(sal) from emp where deptno = 20)' at line 1
+mysql> select ename, sal 
+    -> from emp 
+    -> where sal = (select max(sal) from emp where deptno = 20);
++-------+---------+
+| ename | sal     |
++-------+---------+
+| SCOTT | 3000.00 |
+| FORD  | 3000.00 |
++-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> 
+mysql> select ename , sal from emp where sal >=all (select sal from emp where deptno=20);
++-------+---------+
+| ename | sal     |
++-------+---------+
+| SCOTT | 3000.00 |
+| FORD  | 3000.00 |
++-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select ename , sal from emp where sal >all (select sal from emp where deptno=20);
+Empty set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> select ename, sal 
+    -> from emp 
+    -> where sal > (select max(sal) from emp where deptno = 20)
+    -> 
+    -> ;
+Empty set (0.00 sec)
+
+mysql> select * from dept where exists(select * from emp where emp.deptno= dept.deptno);
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
++--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from dept where not exists(select * from emp where emp.deptno= dept.deptno);
++--------+------------+--------+
+| DEPTNO | DNAME      | LOC    |
++--------+------------+--------+
+|     40 | OPERATIONS | BOSTON |
++--------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!

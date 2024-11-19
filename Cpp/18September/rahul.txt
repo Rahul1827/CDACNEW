@@ -1,0 +1,9 @@
+xyz aklkhkjbckjdckbncksnhbi876898-
+4. Correct the following statements: a. Scanner ss = new Scanner()%; b.
+int a = intNext.ss(); c. String nm = ss.nextString(); d. Float p; please fast
+FILL IN THE BLANKS 1. _______ data type allows a maximum of 63999 characters. 
+2. Two views of tables are_______and______. 3. ______view concentration
+The only language which a computer can understand is machine language
+(true/false)
+class 9 nCourt half yearly question paper of AI​
+What makes computer a wonderful mechine?

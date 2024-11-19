@@ -1,0 +1,30 @@
+<!-- promise is an object i javascript to handle asynchronous operation -->
+ <!-- promise has three states
+ 1.  Pending  ->It is a default state.
+ 2.  fullfill state.
+ 3.  Rejected state.
+
+ For fullfilled state we have two handlers -> then ()handlers
+ and for rejected -> vatch Handler. -->
+
+ <script>
+    let record= new Promise(function(resolve, reject){
+        console.log(typeof resolve, typeof reject);
+        
+        // resolve("API called");
+        reject("API Failed");
+
+    })
+    console.log(record);
+    record.then(function (data){
+
+        console.log(data);
+        
+    })
+
+    record.catch(function(data){
+        console.log(data);
+        
+    })
+    
+ </script>

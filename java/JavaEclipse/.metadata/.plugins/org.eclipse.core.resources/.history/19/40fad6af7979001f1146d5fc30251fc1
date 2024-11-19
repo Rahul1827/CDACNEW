@@ -1,0 +1,51 @@
+package My_class_pac;
+
+public class test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+//		point p1 =new point();
+//		point p2 =new point();
+//		p1.setData(25, 25);
+//	    p2.setData(50, 50);
+//	    
+//	    if(p1.comp() > p2.comp())
+//	    {
+//	    	p1.show();
+//	    	
+//	    }
+//	    else
+//	    {
+//	    	
+//	    	p2.show();
+//	    }
+//	    
+//	    
+		Employee emp1=new Employee();
+		Employee emp2=new Employee();
+		
+		emp1.Set_data(101, "Rahul", 50000);
+//		emp1.show();
+		
+		
+		emp2.Set_data(102, "Pradip", 60000);
+		
+		if(emp1.comp()>emp2.comp())
+		{
+			
+			emp1.show();
+		}
+		
+		else {
+			
+			emp2.show();
+		}
+		System.out.println("==========================================");
+		
+//		emp1.show();
+		
+		
+
+	}
+
+}

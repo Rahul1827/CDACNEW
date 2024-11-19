@@ -1,0 +1,31 @@
+
+
+/* Descendent selector
+
+section p
+{
+color: brown;
+border: 2px solid burlywood;
+
+} */
+
+/* Child Selector
+section >p
+{
+
+    color: yellowgreen
+  
+
+} */
+
+/* Adjusant sibling
+section + p
+{
+    color: aquamarine;
+} */
+
+section~p
+{
+color: coral;
+
+}

@@ -1,0 +1,41 @@
+h1
+
+{
+
+    text-align: center;
+    color: #08a93e;
+}
+p
+{
+    text-align: center;
+    text-decoration-line: underline;
+    text-decoration-color: rgb(0, 255, 64);
+    text-decoration-style: dotted;
+    font-size: large;
+    letter-spacing: 5px;
+    word-spacing: 2px;
+    text-transform: uppercase;
+    text-indent: 20px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-shadow: 5px 5px 10px #08a93e;
+    
+
+}
+a
+{
+    text-decoration: none;
+}
+h1
+{
+    width: 200px;
+    height:  50px;
+}
+div
+{
+    background-color: burlywood;
+}
+p
+{
+    padding-left: 20px ;
+    border: 1px solid black;
+}

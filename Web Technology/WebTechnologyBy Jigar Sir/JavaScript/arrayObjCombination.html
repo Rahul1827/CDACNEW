@@ -1,0 +1,55 @@
+<script>
+
+    var product=[
+    { name:"Roadster",
+        price:1800,
+        size:["xl","xxl"],
+        path:"https://images.fashiola.in/product-list/300x450/myntra/104648972/men-relaxed-casual-pure-cotton-shirt.webp",},
+    { name:"Nike",
+        price:20000,
+        size:["xl","xxl"],
+        path:"https://images.fashiola.in/product-list/300x450/myntra/104648972/men-relaxed-casual-pure-cotton-shirt.webp",},
+    { name:"Puma",
+        price:23000,
+        size:["xl","xxl"],
+        path:"https://images.fashiola.in/product-list/300x450/myntra/104648972/men-relaxed-casual-pure-cotton-shirt.webp",},
+     ];
+
+console.log(product);
+
+for(let ans of product)
+{
+
+    document.write(`
+   
+   
+   <div >
+      <img src="${ans.path}" alt="">
+      <h2>${ans.price}</h2>
+      <p id="p1">${ans.name}</p>
+      <p>${ans.size}</size>
+  </div>
+    `);
+    console.log(ans);
+    
+}
+     
+</script>
+
+<style>
+
+    div{
+
+
+        float: left;
+         margin-right: 20px; 
+         background-color: aquamarine;
+         text-align: center;
+         padding-right: 20px;
+         margin-left: 6%;
+      
+    }
+    p{
+        color: blue;
+    }
+</style>

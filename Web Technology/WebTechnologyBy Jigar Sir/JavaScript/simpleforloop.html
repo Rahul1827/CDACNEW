@@ -1,0 +1,18 @@
+<script>
+    'use strict'
+
+    var amount =150000;
+    var roi=7.10;
+    var openning_bal=0;
+
+
+    for(let i=1; i<=15;i++)
+    {    
+        var interest=(openning_bal+amount)*roi/100;
+        var closing_bal=openning_bal+amount+interest;
+        console.log(i,interest,closing_bal);
+        openning_bal=closing_bal;
+        
+    }
+    
+</script>    

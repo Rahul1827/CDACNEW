@@ -1,0 +1,72 @@
+<input type="number" id="num1">
+<input type="number" id="num2">
+<button class="btn" id="btn+">+</button>
+<button class="btn" id="btn-">-</button>
+<button class="btn" id="btn*">*</button>
+<button class="btn" id="btn/">/</button>
+<p id="result"></p>
+
+<script>
+
+    // Addition
+    document.getElementById('btn+').onclick = function() {
+        var d1 = parseFloat(document.getElementById('num1').value);
+        var d2 = parseFloat(document.getElementById('num2').value);
+
+        
+
+        var result = d1 + d2;
+        document.getElementById('result').innerHTML = "Result: " + result;
+    };
+
+    //Substraction
+
+    document.getElementById('btn-').onclick = function() {
+        var d1 = parseFloat(document.getElementById('num1').value);
+        var d2 = parseFloat(document.getElementById('num2').value);
+
+        
+
+        var result = d1 - d2;
+        document.getElementById('result').innerHTML = "Result: " + result;
+    };
+
+    //Multiplication
+
+    document.getElementById('btn*').onclick = function() {
+        var d1 = parseFloat(document.getElementById('num1').value);
+        var d2 = parseFloat(document.getElementById('num2').value);
+
+        
+
+        var result = d1 * d2;
+        document.getElementById('result').innerHTML = "Result: " + result;
+    };
+
+    //Division
+
+    document.getElementById('btn/').onclick = function() {
+        var d1 = parseFloat(document.getElementById('num1').value);
+        var d2 = parseFloat(document.getElementById('num2').value);
+
+        
+
+        var result = d1 / d2;
+        document.getElementById('result').innerHTML = "Result: " + result;
+    };
+</script>
+
+
+<style>
+
+    .btn
+    
+    {
+
+        border: solid rgb(110, 117, 7);
+        size: 200px;
+        margin-right: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+</style>

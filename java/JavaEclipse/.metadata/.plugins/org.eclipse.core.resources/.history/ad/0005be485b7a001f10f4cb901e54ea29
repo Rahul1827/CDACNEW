@@ -1,0 +1,23 @@
+package Task;
+
+public class B extends A{
+
+	
+	private double bonus;
+	
+	public
+	
+	void GetBonus(double x)
+	{
+		
+		bonus=x;
+		
+	}
+	
+	public void show()
+
+	{
+		super.show();
+		System.out.println("Bonus is ="+bonus);
+	}
+}

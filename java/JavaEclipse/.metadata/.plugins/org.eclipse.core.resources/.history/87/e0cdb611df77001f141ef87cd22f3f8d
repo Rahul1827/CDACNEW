@@ -1,0 +1,62 @@
+
+
+package MyPackage;
+import java.util.Scanner;
+
+public class copyAlternateElements {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner sc=new Scanner(System.in);
+		
+		int size;
+		int a[],b[];
+	
+		System.out.println("Enter the size of the first array");
+		size=sc.nextInt();
+		
+		System.out.println("Enter the elements");
+		
+		a=new int[size];
+		
+		for(int i=0;i<size;i++)
+		{
+			a[i]=sc.nextInt();
+		}
+			
+		
+		System.out.println("first array elements are:");
+		for(int  i=0;i<size;i++)
+		{
+			
+			System.out.println("arr["+i +"]="+a[i]);
+		}
+		
+		
+      System.out.println("================================================");
+	
+      System.out.println("Enter the size of the Second array");
+		size=sc.nextInt();
+		
+		System.out.println("Enter the elements");
+	
+		b=new int[size];
+		
+		for(int i=0;i<size;i++)
+		{
+			b[i]=sc.nextInt();
+		}
+			
+		
+		System.out.println("first array elements are:");
+		for(int  i=0;i<size;i++)
+		{
+			
+			System.out.println("arr["+i +"]="+b[i]);
+		}
+		
+		
+
+}
+}

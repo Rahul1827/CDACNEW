@@ -1,0 +1,17 @@
+package Inheritance;
+
+public class main_inheritance {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+//		SingleInheritance  obj =new SingleInheritance();
+//		obj.show();
+		
+    	Derived1 obj =new Derived1();
+		obj.show();
+        	
+
+	}
+
+}

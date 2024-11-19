@@ -1,0 +1,39 @@
+To clear screen 
+system cls;
+=======================
+To see the version
+select version();
+========================
+To see the user
+select user();
+==========================
+If you stuck 
+cntrl +c
+===========================
+To show databases;
+show databases;
+============================
+To drop the database
+drop database database name;
+=============================
+To check the current database
+select database();
+============================-
+To see the structure of table
+desc tablename;
+=============================
+To avoid duplication of data
+use distinct
+
+
+mysql> select distinct job from emp;
++-----------+
+| job       |
++-----------+
+| CLERK     |
+| SALESMAN  |
+| MANAGER   |
+| ANALYST   |
+| PRESIDENT |
++-----------+
+===============================

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Suite">
+  <test name="Test">
+    <classes>
+      <class name="NGTest.Xml"/>
+       <class name="NGTest.demo"/>
+        <class name="NGTest.PriorityTesting"/>
+            <class name="NGTest.NewTest"/>
+              <!-- <class name="NGTest.Login"/> -->
+                 <class name="NGTest.Parameter"/>
+                 <parameter name ="un" value ="Rahul"/>
+                 <parameter name ="pw" value ="Rahul@123"/>
+        
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

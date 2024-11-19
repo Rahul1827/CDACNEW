@@ -1,0 +1,15 @@
+package Inheritance;
+
+public class SingleInheritance {
+	
+         void show_data()	
+         {
+        	 System.out.println("It is a Super class");
+        	 
+        	 
+        	 
+         }
+	
+	
+
+}

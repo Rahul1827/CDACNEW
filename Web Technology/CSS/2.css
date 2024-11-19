@@ -1,0 +1,25 @@
+/*.className
+{
+property:value;
+}*/
+
+.d1
+{
+
+    background-color: rgb(46, 174, 174);
+    border: 1px solid red;
+}
+
+#div1
+{
+    background-color: bisque;
+}
+h1,p,a
+{
+    color: brown;
+    border: 2px solid b;
+}
+*
+{
+    border:1px solid blue;
+}

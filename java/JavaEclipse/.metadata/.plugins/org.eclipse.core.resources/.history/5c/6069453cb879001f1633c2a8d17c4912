@@ -1,0 +1,90 @@
+package My_class_pac;
+import java.util.Scanner;
+
+
+public class Student {
+
+	private
+	int Roll_no;
+	String name;
+	double percentage;
+	int numberOfStudent;
+	
+	public
+	
+	Scanner sc= new Scanner(System.in);
+	
+void Set_data()
+
+{
+	
+System.out.println("Enter the Roll Number");
+Roll_no=sc.nextInt();
+
+System.out.println("Enter the name");
+name=sc.next();
+
+System.out.println("Enter the Percentage");
+percentage=sc.nextDouble();
+
+
+}
+	
+void Show_data()
+
+{
+System.out.println("Roll Number of the student is ="+Roll_no);	
+System.out.println("Name Of the student is ="+name);
+System.out.println("Percentage of the student is ="+percentage);
+
+}
+	
+double percentage()
+{
+
+	return percentage;
+	
+
+}
+
+void Top3(Student[] std, int nos)
+{
+	for(int i=0; i<nos-1;i++)
+	{
+		for(int j=i+1;j<nos;j++) {
+			
+			
+			if(std[i].percentage > std[j].percentage)
+				
+			{
+				Student temp=std[i];
+				std[i]=std[j];
+				std[j]=temp;
+				
+				System.out.println("================================");	
+			}
+		}
+		
+		
+	}
+	
+	
+	System.out.println("Top 3 Students are:");
+	int count=0;
+	for(int i=0;i<nos;i++)
+	{
+		
+		if(count<3)
+		{
+			
+			std[i].Show_data();
+			System.out.println();	
+		     count++;
+		}
+	}
+
+}
+	
+	
+	
+}

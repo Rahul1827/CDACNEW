@@ -1,0 +1,75 @@
+<!-- <img src="https://cdn1.iconfinder.com/data/icons/filled-line-christmas-icons/75/_gingerbread_man-64.png" alt="">
+
+
+<style>
+
+    img
+    {
+      animation: xyz infinite linear 10s;
+      
+
+
+
+}
+
+@keyframes xyz
+{
+
+
+    form
+    { transform:rotate(0);
+
+        width: 100px;
+    } 
+    to
+    {
+        transform: rotate(360deg);
+        width: 400px;
+    }
+}
+</style> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Image</title>
+    <style>
+        img {
+            animation: rotateScaleAnimation 10s infinite linear;
+            display: block; /* Remove any inline display issues */
+            margin: 0 auto; /* Center the image */
+        }
+
+        @keyframes rotateScaleAnimation {
+            0% {
+                transform: rotate(0deg) scale(1); /* Initial state */
+                width: 100px;
+            }
+            25% {
+                transform: rotate(90deg) scale(1.2); /* First quarter: rotate 90 degrees */
+                width: 200px; /* Resize during this phase */
+            }
+            50% {
+                transform: rotate(180deg) scale(1.4); /* Second quarter: rotate 180 degrees */
+                width: 300px;
+            }
+            75% {
+                transform: rotate(270deg) scale(1.6); /* Third quarter: rotate 270 degrees */
+                width: 350px;
+            }
+            100% {
+                transform: rotate(360deg) scale(2); /* Final state: rotated 360 degrees */
+                width: 400px; /* Final width */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://cdn1.iconfinder.com/data/icons/filled-line-christmas-icons/75/_gingerbread_man-64.png" alt="Gingerbread Man">
+
+</body>
+</html>

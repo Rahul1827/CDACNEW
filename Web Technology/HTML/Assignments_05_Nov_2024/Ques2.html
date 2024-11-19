@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+</head>
+<body>
+    <form>
+        <h3><center>Feedback Form</center></h3>
+        <br>
+
+        <label>Enter Name:</label>
+        <input type="text" placeholder="Your Name">
+        <br><br>
+
+        <label>Write Comment:</label>
+        <textarea rows="4" cols="50" placeholder="Your comments here..."></textarea>
+        <br><br>
+
+        <label>Rating:</label>
+        <input type="radio" name="rating" value="1"> 1
+        <input type="radio" name="rating" value="2"> 2
+        <input type="radio" name="rating" value="3"> 3
+        <input type="radio" name="rating" value="4"> 4
+        <input type="radio" name="rating" value="5"> 5
+        <br><br>
+
+        <label>Terms & Conditions:</label>
+        <input type="checkbox" name="terms"> I agree to the terms and conditions
+        <br><br>
+
+        <label>Select Category:</label>
+        <select name="category">
+            <option value="bug-reports">Bug Reports</option>
+            <option value="active-feedback">Active Feedback</option>
+            <option value="constructive-feedback">Constructive Feedback</option>
+            <option value="product-feedback">Product Feedback</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+</html>

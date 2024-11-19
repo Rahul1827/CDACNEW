@@ -1,0 +1,25 @@
+package Task;
+
+public class C extends B {
+
+	
+	private double net=0, inc=0;
+
+	
+	
+	
+	
+	
+	public void show()
+
+
+	{
+		
+		net = salary+bonus;
+		inc=0.10*net;
+		super.show();
+		 System.out.println("Net Salary is ="+net);
+		 System.out.println("Net Salary is ="+inc);
+		}
+	
+}

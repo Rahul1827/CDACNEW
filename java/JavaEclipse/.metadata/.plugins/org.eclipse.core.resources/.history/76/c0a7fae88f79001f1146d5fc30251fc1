@@ -1,0 +1,52 @@
+package My_class_pac;
+
+public class Constructor {
+
+	private
+	int a;
+	float b;
+	String name;
+	public
+	
+	Constructor()
+	{
+		
+		a=45;
+		b=50.21f;
+		
+		
+		
+	}
+	Constructor(int x )
+	{
+		a=x;
+	
+		
+		
+		
+	}
+
+	
+	Constructor(int x , float y, String na)
+	{
+		
+	
+		a=x;
+		b=y;
+		name=na;
+		
+		
+	}
+	
+	
+	void Show()
+
+	{
+		
+		System.out.println("A is ="+a);
+		System.out.println("B is ="+b);
+		System.out.println("Name  is ="+name);
+		
+	}
+	
+}

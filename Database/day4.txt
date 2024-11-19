@@ -1,0 +1,33 @@
+CREATE TABLE emp1 (
+      empno varchar(4) check (empno like 'e%')Primary key,
+     ename varchar(20) not null,
+     sal float(10,2)not null 
+      check(sal>10000),
+     dno numeric(2),
+     city varchar(20) default 'nashik',
+     check (city in ('pune', 'nashik', 'Mum')),
+     pan varchar(20) unique,
+        FOREIGN KEY (dno) REFERENCES dept1(deptno) on delete cascade   on update cascade);
+
+
+create table emp2(empno int, ename varchar(20), sal int);
+
+
+alter table emp2  modify ename varchar(50);
+alter table emp2  add primary key (empno);
+alter table emp2 add email varchar(50);
+alter table emp2 change sal salary int ;
+
+
+ALTER TABLE newemp2
+Add  check (salary > 10000);
+
+alter table newemp2 add divno char(10) after ename;
+
+create view v1 as select * from emp;
+			select * from v1;
+
+ create view v2 as select empno, ename, hiredate from emp where deptno =10;
+
+create view v4 as select empno, hiredate,job,deptno , sal from emp where sal between 1000 and 2000 && deptno =20;
+insert into v4 values (1,'2024-2-2','manager',10,1200);

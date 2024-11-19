@@ -1,0 +1,13 @@
+package Task;
+
+public class C extends B {
+
+	public
+	void show()
+
+{
+		super.show();
+		 System.out.println("show C");
+		}
+	
+}

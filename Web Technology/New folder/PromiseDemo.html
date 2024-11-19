@@ -1,0 +1,40 @@
+<script>
+
+console.log("start");
+
+
+const fetchData= ()=>{
+
+    return new Promise((resolve , reject)=>{
+      setTimeout(()=>{
+
+        let isDone = false;
+
+        if(isDone)
+      {
+        resolve("work is done");
+
+      }else 
+      {
+        reject("work is not done");
+      }
+      
+      },2000); 
+   
+
+    })
+}
+
+fetchData().then((res)=>{
+    console.log(res);
+
+    
+}).catch((error)=>{
+    console.log(error);
+    
+})
+console.log("end");
+
+
+
+</script>

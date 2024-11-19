@@ -1,0 +1,46 @@
+h2
+{
+    text-align: center
+}
+h3
+{
+    text-align: left;
+}
+form
+{
+   
+    border: 2px solid black;
+     margin: 500px; 
+     width: 500px;
+     border-radius: 2rem;
+     margin-top: 5%;
+}
+
+section{
+    padding: 15%;
+    padding-top: 7%;
+    padding-bottom: 7%;
+}
+input{
+    width:350px;
+    border-radius: 1rem;
+    height: 25px;
+    padding-bottom : 5px;
+    margin-bottom: 10px;
+}
+textarea{
+    width: 350px;
+    border-radius: 1rem;
+}
+button{
+    width: 300px;
+    background-color: rgb(100, 219, 21);
+    color: red;
+    margin: 10px;
+    height: 40px;
+    border-radius: 2rem;
+}
+label{
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}

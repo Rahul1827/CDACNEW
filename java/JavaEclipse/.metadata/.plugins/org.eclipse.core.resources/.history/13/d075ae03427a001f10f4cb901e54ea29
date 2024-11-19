@@ -1,0 +1,14 @@
+package Inheritance;
+
+public class Derived1 extends SingleInheritance{
+	 
+	 public void show()
+	 {
+		 
+		 
+		 System.out.println("It is a Derived class");
+	 }
+	
+	
+}
+

@@ -1,0 +1,47 @@
+//package Sep24;
+//
+//public class excep1 {
+//
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//}
+package Sep24;
+
+import java.util.Scanner;
+
+public class excep1{
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+		Scanner sc=new Scanner(System.in);
+		
+		int a,b,c=0,d;
+
+		System.out.println("Enter the value of a and b");
+		a=sc.nextInt();
+		b=sc.nextInt();
+		
+		try {
+			
+			System.out.println("All the best");
+			c=a+b;
+			
+			System.out.println("Addition");
+			c=a+b;
+			
+			
+			
+			
+		} catch(Exception obj)
+		{
+			
+			
+		}
+
+}
+
+}

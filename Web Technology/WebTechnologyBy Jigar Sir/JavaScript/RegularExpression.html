@@ -1,0 +1,48 @@
+<script>
+
+    var exp=/^[1-9][0-9][0-9][0-9][0-9][0-9]$/;
+    var pincode =453441;
+    var result = exp.test(pincode);
+    console.log(result);
+
+
+
+    //mobile validation
+
+    var exp1 =/^[6-9][0-9]{9}$/;
+    var mobile =7067332884;
+    var result=exp1.test(mobile);
+    console.log(result);
+
+     //Pan Card
+    var exp2=/^([a-zA-Z]{5})([0-9]{4})([a-zA-Z])$/
+    var pancardNo='FUSPP5193Q';
+    var result=exp2.test(pancardNo);
+    console.log(result);
+
+    //Name
+
+    var exp3= /^[a-zA-Z]([a-zA-Z ]+)?[a-zA-Z]$/
+    var name='Rahul ';
+    var result=exp3.test(name);
+    console.log(result);
+
+   //Email-id
+
+   var exp4=/^([a-zA-Z0-9\.]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,})(\.[a-zA-Z]{2,}])?$/
+   var email="rahul.patil.sbg@gmail.com";
+    var result=exp4.test(email);
+    console.log(result);
+
+    //Password
+
+    var exp5= /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#/$]).{4,12}$/
+    var password='Rahul@161827';
+    var result=exp5.test(password);
+    console.log(result);
+    
+
+    
+    
+    
+</script>
