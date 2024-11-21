@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+---Data Transfer Techniques----
+1.props drilling                     |
+2.cintext api                        |- Redux
+3.state lift                         |
+
+props drilling & context api:
+-from parent to any child or any grand-child.
+
+state

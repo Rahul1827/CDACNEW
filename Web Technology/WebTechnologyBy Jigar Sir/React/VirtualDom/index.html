@@ -1,0 +1,14 @@
+<div id="root"></div>
+<script>
+  setInterval(() => {
+    var record = new Date();
+    document.getElementById("root").innerHTML = `
+        <div>
+            <h1>
+                
+                <span>
+                    Time ${record.toLocaleString()}</span></h1>
+            </div>
+        `;
+  }, 1000);
+</script>
