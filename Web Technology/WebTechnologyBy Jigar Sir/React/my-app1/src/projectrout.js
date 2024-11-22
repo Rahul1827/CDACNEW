@@ -16,6 +16,7 @@ import Class4 from "./components/Class4";
 import CompA from "./components/CompA";
 import Parent from "./components/Parent";
 import Parent2 from "./components/Parent2";
+import Cart from "./components/Cart";
 
   const projectrout=createBrowserRouter([
     {
@@ -76,6 +77,10 @@ import Parent2 from "./components/Parent2";
                path: "parent2",
                element:<Parent2/>
             },
+            {
+               path: "cart",
+               element:<Cart/>
+            }
 
 
 

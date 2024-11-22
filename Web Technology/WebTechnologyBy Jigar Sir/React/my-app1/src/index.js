@@ -7,8 +7,10 @@ import { Outlet ,Link} from 'react-router-dom';
 //console.log(ReactDom);
 import App from './components/App';
 import projectrout from './projectrout';
+import { Provider } from 'react-redux'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import projectStore from './Redux/projectStore';
 
 const result =ReactDom.createRoot(document.getElementById("root"));
 //result.render("Hello World!...");
@@ -25,4 +27,7 @@ const result =ReactDom.createRoot(document.getElementById("root"));
 
 //result.render(<App/>)
 
-result.render(<RouterProvider router={projectrout}/>);
+result.render(
+<Provider store={projectStore}>
+<RouterProvider router={projectrout}/>);
+</Provider>)
