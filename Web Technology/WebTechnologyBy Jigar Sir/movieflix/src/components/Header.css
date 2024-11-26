@@ -1,0 +1,19 @@
+.container{
+    color: #f3e9dc;
+        align-items: center;
+        background-color: red;
+        
+    };
+    
+    .menus{
+        color: #f3e9dc;
+        align-items: center;
+        background-color: red;
+    }
+    
+    .image{
+        height: 40px;
+        width: 100px;
+    }
+    
+    
