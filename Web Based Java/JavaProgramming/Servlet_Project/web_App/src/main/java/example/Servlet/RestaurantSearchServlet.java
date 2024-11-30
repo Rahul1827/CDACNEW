@@ -46,6 +46,9 @@ public class RestaurantSearchServlet extends HttpServlet {
 		}else
 		{
 			
+			RequestDispatcher dispatcher=request.getRequestDispatcher("display");
+			request.setAttribute("SearchedRestaurant", foundRestaurant);
+			dispatcher.forward(request, response);
 		
 		System.out.println(foundRestaurant);
 		}
