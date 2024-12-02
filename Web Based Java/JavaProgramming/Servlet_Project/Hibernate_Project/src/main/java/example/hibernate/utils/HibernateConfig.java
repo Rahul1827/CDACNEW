@@ -6,8 +6,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import example.hibernate.entity.Actor;
+import example.hibernate.entity.Film;
+import example.hibernate.entity.Song;
 
-public class HibernateUtilities {
+public class HibernateConfig {
 
     public static SessionFactory sessionFactory() {
         Properties configProperties = new Properties();
@@ -20,6 +22,8 @@ public class HibernateUtilities {
         Configuration conf = new Configuration();
         conf.setProperties(configProperties);
         conf.addAnnotatedClass(Actor.class);
+        conf.addAnnotatedClass(Film.class);
+        conf.addAnnotatedClass(Song.class);
         SessionFactory factory=conf.buildSessionFactory();
 
         return factory;

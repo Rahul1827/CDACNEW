@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import example.hibernate.entity.Actor;
-import example.hibernate.utils.HibernateUtilities;
+import example.hibernate.utils.HibernateConfig;
 
 public class RecordUpdationExample {
 
@@ -15,7 +15,7 @@ public class RecordUpdationExample {
 		
 		
 
-		 try (SessionFactory factory = HibernateUtilities.sessionFactory();
+		 try (SessionFactory factory = HibernateConfig.sessionFactory();
 	             Session session = factory.openSession()) {
 
 	         // Loading an entity of type actor against an Id:A03

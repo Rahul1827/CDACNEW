@@ -5,15 +5,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import example.hibernate.entity.Actor;
-import example.hibernate.utils.HibernateUtilities;
+import example.hibernate.utils.HibernateConfig;
 
 public class RecordInsertionWithoutXMLExample {
 
     public static void main(String[] args) {
-        try (SessionFactory factory = HibernateUtilities.sessionFactory();
+        try (SessionFactory factory = HibernateConfig.sessionFactory();
              Session session = factory.openSession()) {
 
-            Actor actorobj = new Actor("A04", "Katrina", "Kaif", 41);
+            Actor actorobj = new Actor("A06", "Tripti", "Dimri", 35);
 
             Transaction tx = session.beginTransaction();
             session.persist(actorobj);
